@@ -24,5 +24,7 @@ RUN npm rebuild node-sass
 # Building dist
 RUN npm run build
 
+RUN ll
+
 # Copy dist to nginx for hosting
-COPY ./dist /usr/share/nginx/html
+COPY /ball-and-blockchain-web/dist /usr/share/nginx/html
