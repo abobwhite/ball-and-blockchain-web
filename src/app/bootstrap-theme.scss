@@ -1,0 +1,79 @@
+@import "_colors";
+
+//Buttons
+$btn-primary-color: $white;
+$btn-primary-bg: $primary;
+.btn-primary {
+  background-image: linear-gradient($primaryLight, $primary);
+}
+$btn-primary-border: $primaryDark;
+
+$btn-default-color: $secondary;
+$btn-default-bg: $secondaryLight;
+$btn-default-border: $secondaryDark;
+.btn-default {
+  background-image: linear-gradient($secondaryLight, $secondaryDark);
+  text-shadow: 1px 1px 0 $white;
+}
+
+.btn-default, .btn-primary, .btn-success, .btn-info, .btn-warning, .btn-danger {
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  height: 2em;
+  line-height: 2;
+  padding: 0 1em;
+  text-transform: uppercase;
+}
+
+//Navbar
+$navbar-height: 0;
+$navbar-margin-bottom: 0;
+$navbar-border-radius: 0;
+$navbar-default-color: $white;
+$navbar-default-bg: $primary;
+$navbar-default-border: none;
+.navbar-default {
+  background-image: linear-gradient($primaryLight, $primary);
+  box-shadow: 0 2px 3px rgba(0,0,0,.5);
+}
+
+// Navbar links
+$navbar-default-link-color: $white;
+$navbar-default-link-hover-color: $white;
+$navbar-default-link-hover-bg: $primaryLight;
+
+//Inverse navbar
+$navbar-inverse-color: $primaryText;
+$navbar-inverse-bg: $white;
+
+// Inverted navbar links
+$navbar-inverse-link-color: $primaryText;
+$navbar-inverse-link-hover-color: $white;
+$navbar-inverse-link-hover-bg: $primaryText;
+$navbar-inverse-link-active-color: $navbar-inverse-link-hover-color !default;
+$navbar-inverse-link-active-bg: darken($navbar-inverse-bg, 10%) !default;
+.navbar-inverse {
+  border: 0;
+
+  .navbar-nav {
+    li {
+      border: 0;
+      &.active > a, a:hover {
+        background-image: linear-gradient($primaryLight, $primary);
+      }
+    }
+  }
+}
+
+//Jumbotron
+$jumbotron-padding: 0;
+$jumbotron-color:                inherit !default;
+//$jumbotron-bg:                   $gray-lighter !default;
+$jumbotron-heading-color:        inherit !default;
+
+//Inputs
+$input-height-base: 2em;
+$input-height-large: 2.154em;
+.form-control {
+  padding: 0 .5em;
+}

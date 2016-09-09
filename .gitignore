@@ -1,0 +1,16 @@
+#IntelliJ/Webstorm
+/*.iml
+/.idea
+
+#NodeJS
+/node_modules
+*.log
+
+#TypeScript
+/typings
+
+#Karma
+/coverage
+
+#Webpack
+/dist
