@@ -6,9 +6,6 @@ RUN apt-get update && apt-get install -y git nodejs npm
 # Create a symbolic link for node, as many Node.js tools use this name to execute
 RUN ln -s /usr/bin/nodejs /usr/bin/node
 
-# Install bower & grunt-cli
-#RUN npm install -g bower grunt-cli
-
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 
 # Copy application files and set working dir
@@ -17,6 +14,9 @@ COPY . /ball-and-blockchain-web
 WORKDIR /ball-and-blockchain-web
 
 RUN npm set progress=false && npm install
+
+# Rebuild node-sass due to some node versioning possible conflicts
+RUN npm rebuild node-sass
 
 #TODO: Run tests
 # RUN npm test
