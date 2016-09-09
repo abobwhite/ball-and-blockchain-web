@@ -27,4 +27,4 @@ RUN npm run build
 RUN ls -l
 
 # Copy dist to nginx for hosting
-COPY /ball-and-blockchain-web/dist /usr/share/nginx/html
+COPY dist /usr/share/nginx/html

@@ -24,7 +24,7 @@ class EventsSvc {
       callback(this.eventResultCache[eventName]);
     }
 
-    let cb: Function = function (event: string, payload: any): void {
+    let cb: any = (event: ng.IAngularEvent, ...payload: any[]): any  => {
       callback(payload);
     };
 
