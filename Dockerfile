@@ -29,4 +29,4 @@ RUN npm run build
 RUN ls -l
 
 # Copy dist to nginx for hosting
-RUN cp -a dist /usr/share/nginx/html
+RUN cp -a dist/. /usr/share/nginx/html
