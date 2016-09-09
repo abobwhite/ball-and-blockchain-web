@@ -7,9 +7,17 @@ import 'angular-toastr';
 import 'angular-toastr/dist/angular-toastr.css';
 require('font-awesome/css/font-awesome.css');
 
+import HeaderComp from './header/header.comp.ts';
+import HeaderCtrl from './header/header.ctrl.ts';
+import SideBarComp from './side-bar/side-bar.comp.ts';
+import SideBarCtrl from './side-bar/side-bar.ctrl.ts';
 import HomeCtrl from './home/home.ctrl.ts';
 
 let module: ng.IModule = angular.module('starterApp', ['ui.router', 'toastr'])
+    .controller('HeaderCtrl', HeaderCtrl)
+    .component('header', HeaderComp)
+    .controller('SideBarCtrl', SideBarCtrl)
+    .component('sideBar', SideBarComp)
     .controller('HomeCtrl', HomeCtrl);
 
 import './routes.ts';

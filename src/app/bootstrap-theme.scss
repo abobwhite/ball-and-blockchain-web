@@ -44,11 +44,11 @@ $navbar-default-link-hover-bg: $primaryLight;
 
 //Inverse navbar
 $navbar-inverse-color: $primaryText;
-$navbar-inverse-bg: $white;
+$navbar-inverse-bg: $blackish;
 
 // Inverted navbar links
 $navbar-inverse-link-color: $primaryText;
-$navbar-inverse-link-hover-color: $white;
+$navbar-inverse-link-hover-color: $blackish;
 $navbar-inverse-link-hover-bg: $primaryText;
 $navbar-inverse-link-active-color: $navbar-inverse-link-hover-color !default;
 $navbar-inverse-link-active-bg: darken($navbar-inverse-bg, 10%) !default;

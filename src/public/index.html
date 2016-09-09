@@ -2,13 +2,20 @@
 <html lang="en" class="flexbox">
   <head>
     <meta charset="UTF-8">
-    <title>Angular-TypeScript-Webpack-Starter</title>
+    <title>Facultative Underwriting Exchange</title>
   </head>
   <body ng-app="starterApp">
-    <div id="wrapper">
-      <!-- TODO: Header -->
-      <div id="content" ui-view></div>
+  <div id="wrapper">
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <header></header>
+      <side-bar></side-bar>
+    </nav>
+    <div id="page-wrapper">
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <div id="content" ui-view></div>
+      </div>
     </div>
-    <!-- TODO: Footer -->
+  </div>
   </body>
 </html>
