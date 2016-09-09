@@ -11,9 +11,11 @@ COPY deploy/nginx.conf /etc/nginx/nginx.conf
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm set progress=false && npm install
 RUN mkdir -p /ball-and-blockchain-web && cp -a /tmp/node_modules /ball-and-blockchain-web
-
 WORKDIR /ball-and-blockchain-web
 ADD . /ball-and-blockchain-web
+
+RUN npm install typings -g
+RUN typings install
 
 # Rebuild node-sass due to some node versioning possible conflicts
 RUN npm rebuild node-sass
