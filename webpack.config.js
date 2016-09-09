@@ -206,9 +206,16 @@ module.exports = function makeWebpackConfig () {
   config.devServer = {
     contentBase: './src/public',
     stats: 'minimal',
-    port: 7777
+    port: 7777,
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:8080',
+        rewrite: function(req) {
+          req.url = req.url.replace(/^\/api/, '');
+        }
+      }
+    }
   };
-  //TODO: Add proxy if necessary
 
   return config;
 }();

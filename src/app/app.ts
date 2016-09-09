@@ -14,4 +14,18 @@ let module: ng.IModule = angular.module('starterApp', ['ui.router', 'toastr'])
 
 import './routes.ts';
 
+module.config(($httpProvider) => {
+  $httpProvider.interceptors.push(() => {
+    return {
+      request: (httpConfig) => {
+        if (httpConfig.url.indexOf('.html') !== -1) {
+          httpConfig.url = `/api${httpConfig.url}`;
+        }
+
+        return httpConfig;
+      }
+    };
+  });
+});
+
 export default module;
