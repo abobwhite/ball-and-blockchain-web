@@ -25,4 +25,4 @@ RUN npm rebuild node-sass
 RUN npm run build
 
 # Copy dist to nginx for hosting
-COPY dist /usr/share/nginx/html
+COPY ./dist /usr/share/nginx/html
