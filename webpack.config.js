@@ -127,6 +127,10 @@ module.exports = function makeWebpackConfig () {
       // FONT AWESOME
       test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
       loader: isTest ? 'null' : "file"
+    }, {
+      // JSON
+      test: /\.(json)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+      loader: isTest ? 'null' : "file"
     }]
   };
 
