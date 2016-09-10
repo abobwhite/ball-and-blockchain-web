@@ -34,7 +34,7 @@ angular.module('ballAndBlockchain').config(($stateProvider: ng.ui.IStateProvider
       resolve: {
         policies: /** @ngInject */(Policies: PolicySvc, Web3: Web3Svc) => {
           return Policies.getPolicies().then((policies: any) => {
-            return Array<Policy>(policies.filter((policy: Policy) => { return policy.cedingUserId === Web3.activeAccount; }));
+            return policies.filter((policy: Policy) => { return policy.cedingUserId === Web3.activeAccount; });
           });
         }
       }

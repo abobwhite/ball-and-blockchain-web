@@ -34,7 +34,7 @@ class MyPoliciesCtrl {
 
   private loadPolicies(): void {
     this.Policies.getPolicies().then((policies: any) => {
-      this.policies = Array<Policy>(policies.filter((policy: Policy) => { return policy.cedingUserId === this.Web3.activeAccount; }));
+      this.policies = policies.filter((policy: Policy) => { return policy.cedingUserId === this.Web3.activeAccount; });
     }, () => {
       this.toastr.error('Could not load policies');
     });
