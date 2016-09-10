@@ -23,6 +23,7 @@ import NgTranscludeReplaceDir from './directives/ng-transclude-replace.dir.ts';
 import Web3Svc from './service/web3.svc.ts';
 import RatingCreateCtrl from './ratings/rating-create/rating-create.ctrl.ts';
 import BidCreateCtrl from './bids/bid-create/bid-create.ctrl.ts';
+import EnumHelperSvc from './service/enum-helper.svc.ts';
 
 let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toastr', 'ui.bootstrap'])
     .directive('formField', FormFieldDir)
@@ -31,6 +32,7 @@ let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toas
     .service('Events', Events)
     .service('Policies', Policies)
     .service('Web3', Web3Svc)
+    .service('EnumHelper', EnumHelperSvc)
     .controller('HeaderCtrl', HeaderCtrl)
     .component('header', HeaderComp)
     .controller('SideBarCtrl', SideBarCtrl)

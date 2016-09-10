@@ -25,12 +25,12 @@ class BidCreateCtrl {
 
   public saveBid(form: any): void {
     if (form.$valid) {
-      // this.Policies.bid(this.bid.policyId, this.bid.value).then(() => {
-      //   this.toastr.success('Bid was placed');
-      //   this.$uibModalInstance.dismiss();
-      // }, () => {
-      //   this.toastr.error('There was an error placing your bid');
-      // });
+      this.Policies.bid(this.bid.policyId, this.bid.value).then(() => {
+        this.toastr.success('Bid was placed');
+        this.$uibModalInstance.dismiss();
+      }, () => {
+        this.toastr.error('There was an error placing your bid');
+      });
     } else {
       this.toastr.error('All fields are required, please try again');
     }

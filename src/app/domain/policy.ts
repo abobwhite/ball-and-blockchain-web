@@ -5,6 +5,7 @@ import Rating from './rating.ts';
 import Bid from './bid.ts';
 import * as moment from 'moment';
 import DomainBase from './domain-base.ts';
+import MaritalStatus from "./marital-status.ts";
 
 class Policy extends DomainBase {
   public id: string;
@@ -17,7 +18,9 @@ class Policy extends DomainBase {
   public policyFaceAmount: number;
   public gender: Gender;
   public dob: Date;
-  public disclosures: string;
+  public maritalStatus: MaritalStatus;
+  public smoker: boolean = false;
+  public disclosures: string = '';
   public ratings: Array<Rating> = [];
   public bids: Array<Bid> = [];
 

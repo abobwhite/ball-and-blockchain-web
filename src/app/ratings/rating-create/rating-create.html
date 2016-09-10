@@ -9,13 +9,14 @@
           <div class="col-sm-12">
             <form-field label="Score (1-100)" required>
               <input type="number" ng-model="ctrl.rating.value" required ng-min="1" ng-max="100" />
+            </form-field>
 
-              <form-field label="Cost" required>
-                <div class="input-group">
-                  <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
-                  <input type="text" class="form-control" ng-model="ctrl.rating.cost" required placeholder="50" />
-                </div>
-              </form-field>
+            <form-field label="Cost" required>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+                <input type="text" class="form-control" ng-model="ctrl.rating.cost" required placeholder="50" />
+              </div>
+            </form-field>
           </div>
         </div>
       </div>
