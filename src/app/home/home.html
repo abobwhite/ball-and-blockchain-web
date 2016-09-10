@@ -26,7 +26,7 @@
                 <tr>
                   <th><!-- Status Icon --></th>
                   <th>Risk Type</th>
-                  <th>Amount at Risk</th>
+                  <th>Face Amount</th>
                   <th>Cedant</th>
                   <th>Ratings</th>
                   <th>Rating Expiration</th>
@@ -60,13 +60,32 @@
     <i class="fa fa-2x fa-arrow-circle-left pointer" ng-click="ctrl.unSelectPolicy()"></i><br/><br/>
     <uib-tabset active="active">
       <uib-tab index="0" heading="Policy Overview">
-        Policy Overview
+        <dl class="dl-horizontal">
+          <dt>Policy #</dt>
+          <dd>{{ctrl.selectedPolicy.id}}</dd>
+          <dt>Cedant</dt>
+          <dd>{{ctrl.selectedPolicy.cedingUserId}}</dd>
+          <dt>Risk Type</dt>
+          <dd>{{ctrl.selectedPolicy.riskType}}</dd>
+          <dt>Face Amount</dt>
+          <dd>{{ctrl.selectedPolicy.policyFaceAmount}}</dd>
+          <dt>Rating Expiration</dt>
+          <dd>{{ctrl.selectedPolicy.ratingExpiration | date : 'short'}}</dd>
+          <dt>Bid Expiration</dt>
+          <dd>{{ctrl.selectedPolicy.offerExpiration | date : 'short'}}</dd>
+        </dl>
       </uib-tab>
-      <uib-tab index="1" heading="Ratings" select="alertMe()">
-        RATINGS
+      <uib-tab index="1">
+        <uib-tab-heading>
+          Ratings&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.ratings.length}}</span>
+        </uib-tab-heading>
+        TODO
       </uib-tab>
-      <uib-tab index="2" heading="Bids" select="alertMe()">
-        BIDS
+      <uib-tab index="2">
+        <uib-tab-heading>
+          BIDS&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.bids.length}}</span>
+        </uib-tab-heading>
+        TODO
       </uib-tab>
     </uib-tabset>
   </div>
