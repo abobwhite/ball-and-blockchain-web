@@ -1,4 +1,6 @@
 import IPromise = angular.IPromise;
+import Policy from '../domain/policy.ts';
+import * as moment from 'moment';
 var Web3: any = require('web3');
 
 class PolicySvc {
@@ -25,7 +27,21 @@ class PolicySvc {
   }
 
   public getPolicies(): IPromise<any> {
-    return this.promiseWrapper('getPolicies', []);
+    return this.promiseWrapper('getPolicies', []).then(result => {
+      return result[0].map((item, index) => {
+        return new Policy({
+          id: result[0][index],
+          riskType: this.$web3.toAscii(result[1][index]),
+          ratingExpiration: moment().add(this.$web3.toDecimal(result[2][index]), 'd').toDate(),
+          offerExpiration: moment().add(this.$web3.toDecimal(result[3][index]), 'd').toDate(),
+          territoryOfIssue: this.$web3.toAscii(result[4][index]),
+          policyFaceAmount: this.$web3.toDecimal(result[5][index]),
+          disclosures: this.$web3.toAscii(result[6][index]),
+          assumingUserId: 'q827343333',
+          cedingUserId: '923878327'
+        });
+      });
+    });
   }
 
   public bid(value: number): IPromise<any> {
