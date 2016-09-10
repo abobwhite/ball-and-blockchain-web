@@ -10,71 +10,25 @@ class PolicySvc {
   constructor($rootScope: ng.IRootScopeService) {
     this.$rootScope = $rootScope;
     // CONFIG.eth.provider
-    this.$web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+    this.$web3 = new Web3(new Web3.providers.HttpProvider('http://192.241.254.151:8080'));
 
     this.$web3.eth.defaultAccount = this.$web3.eth.accounts[0];
 
-    const abi: Array<Object> = [{'constant': true, 'inputs': [], 'name': 'ended', 'outputs': [{'name': '', 'type': 'bool'}], 'type': 'function'}, {
-      'constant': false,
-      'inputs': [{'name': '_value', 'type': 'uint256'}],
-      'name': 'bid',
-      'outputs': [],
-      'type': 'function'
-    }, {
-      'constant': false,
-      'inputs': [{'name': '_disclosures', 'type': 'bytes32'}],
-      'name': 'createPolicy',
-      'outputs': [],
-      'type': 'function'
-    }, {'constant': false, 'inputs': [], 'name': 'cancelBid', 'outputs': [], 'type': 'function'}, {
-      'constant': false,
-      'inputs': [{'name': 'targetBidder', 'type': 'address'}],
-      'name': 'accept',
-      'outputs': [],
-      'type': 'function'
-    }, {
-      'constant': false,
-      'inputs': [{'name': '_disclosures', 'type': 'bytes32'}],
-      'name': 'getPolicy',
-      'outputs': [{'name': 'disclosures', 'type': 'bytes32'}],
-      'type': 'function'
-    }, {
-      'constant': true,
-      'inputs': [],
-      'name': 'getBids',
-      'outputs': [{'name': 'bidder', 'type': 'address[]'}, {'name': 'value', 'type': 'uint256[]'}],
-      'type': 'function'
-    }, {'inputs': [], 'type': 'constructor'}, {
-      'anonymous': false,
-      'inputs': [{'indexed': true, 'name': '_from', 'type': 'address'}, {'indexed': false, 'name': '_message', 'type': 'string'}],
-      'name': 'NewBid',
-      'type': 'event'
-    }, {
-      'anonymous': false,
-      'inputs': [{'indexed': true, 'name': '_from', 'type': 'address'}, {'indexed': false, 'name': '_message', 'type': 'string'}],
-      'name': 'CanceledBid',
-      'type': 'event'
-    }, {
-      'anonymous': false,
-      'inputs': [{'indexed': true, 'name': '_from', 'type': 'address'}, {'indexed': false, 'name': '_message', 'type': 'string'}],
-      'name': 'Accepted',
-      'type': 'event'
-    }];
-    const address: string = '0x15c38c9539ecb15dc49b7872e0a2f72c0f3ef4a3';
+    const abi: Array<Object> = [{"constant":false,"inputs":[{"name":"_policyId","type":"bytes32"},{"name":"targetBidder","type":"address"}],"name":"accept","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"getPolicies","outputs":[{"name":"id","type":"bytes32[]"},{"name":"riskType","type":"bytes32[]"},{"name":"ratingExpiration","type":"uint256[]"},{"name":"offerExpiration","type":"uint256[]"},{"name":"territoryOfIssue","type":"bytes32[]"},{"name":"policyFaceAmount","type":"uint256[]"},{"name":"disclosures","type":"bytes32[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_policyId","type":"bytes32"},{"name":"_value","type":"uint256"},{"name":"_cost","type":"uint256"},{"name":"_details","type":"bytes32"}],"name":"reviewPolicy","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_riskType","type":"bytes32"},{"name":"_ratingExpiration","type":"uint256"},{"name":"_offerExpiration","type":"uint256"},{"name":"_territoryOfIssue","type":"bytes32"},{"name":"_policyFaceAmount","type":"uint256"},{"name":"_gender","type":"bytes32"},{"name":"_dob","type":"uint256"},{"name":"_disclosures","type":"bytes32"}],"name":"addPolicy","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"_policyId","type":"bytes32"}],"name":"getBids","outputs":[{"name":"bidders","type":"address[]"},{"name":"values","type":"uint256[]"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"_policyId","type":"bytes32"},{"name":"_value","type":"uint256"}],"name":"bid","outputs":[{"name":"success","type":"bool"}],"payable":false,"type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":false,"name":"_message","type":"string"}],"name":"NewBid","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":false,"name":"_message","type":"string"}],"name":"CanceledBid","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_from","type":"address"},{"indexed":false,"name":"_message","type":"string"}],"name":"Accepted","type":"event"}];
+    const address: string = '0xf152a771cfaa9a848af9f52dbcb442f75f629eda';
 
     this.$policyContract = this.$web3.eth.contract(abi).at(address);
   }
 
-  public createPolicy(disclosure: string): IPromise<any>  {
-    return this.promiseWrapper('createPolicy', [disclosure]);
+  public addPolicy(disclosure: string): IPromise<any>  {
+    return this.promiseWrapper('addPolicy', [disclosure]);
   }
 
-  public getPolicy(): IPromise<any> {
-    return this.promiseWrapper('getPolicy', []);
+  public getPolicies(): IPromise<any> {
+    return this.promiseWrapper('getPolicies', []);
   }
 
   public bid(value: number): IPromise<any> {
-    //this.$web3.eth.defaultAccount=this.$web3.eth.accounts[1];
     return this.promiseWrapper('bid', [value]);
   }
 
