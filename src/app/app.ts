@@ -38,20 +38,21 @@ let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toas
     .controller('LoginCtrl', LoginCtrl);
 
 import './routes.ts';
+import IToastrService = angular.toastr.IToastrService;
 
 module.config(($locationProvider: ng.ILocationProvider) => {
   $locationProvider.html5Mode(true);
-  // $httpProvider.interceptors.push(() => {
-  //   return {
-  //     request: (httpConfig) => {
-  //       if (httpConfig.url.indexOf('.html') !== -1) {
-  //         httpConfig.url = `/api${httpConfig.url}`;
-  //       }
-  //
-  //       return httpConfig;
-  //     }
-  //   };
-  // });
+});
+
+module.run(/** @ngInject */($rootScope: ng.IRootScopeService, $state: ng.ui.IStateService, $stateParams: ng.ui.IStateParamsService,
+            Auth: AuthSvc, toastr: IToastrService) => {
+  $rootScope.$on('$stateChangeStart', (event, toState) => {
+    if (!Auth.getLoggedInUser() && toState.name !== 'Login') {
+      event.preventDefault();
+      toastr.warning('You must login to access the exchange');
+      $state.go('Login');
+    }
+  });
 });
 
 export default module;

@@ -2,10 +2,12 @@ import Web3Svc from './web3.svc.ts';
 
 class AuthSvc {
   private Web3: Web3Svc;
+  private $state: ng.ui.IStateService;
 
   /** @ngInject */
-  constructor(Web3: Web3Svc) {
+  constructor(Web3: Web3Svc, $state: ng.ui.IStateService) {
     this.Web3 = Web3;
+    this.$state = $state;
   }
 
   public login(username: string): void {
@@ -19,7 +21,8 @@ class AuthSvc {
   }
 
   public logout(): void {
-    return localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('loggedInUser');
+    this.$state.go('Login');
   }
 }
 
