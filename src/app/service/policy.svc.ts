@@ -4,15 +4,17 @@ import Rating from '../domain/rating.ts';
 import Web3Svc from './web3.svc.ts';
 import abi from '../abi/policy.ts';
 import Territory from '../domain/territory.ts';
+import EventsSvc from "./events.svc.ts";
 
 class PolicySvc {
   private Web3: Web3Svc;
   private policyContract: any;
 
   /** @ngInject */
-  constructor(Web3: Web3Svc) {
+  constructor(Web3: Web3Svc, Events: EventsSvc) {
     this.Web3 = Web3;
     const address: string = '0xffef5840edf53beafc3f7aee8fb3fd77ecb569f0';
+    //const address: string = '0x098973d569c95d00b8f26924243a394cf520c285';
 
     this.policyContract = this.Web3.getContract(abi, address);
   }
