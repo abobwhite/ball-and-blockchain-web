@@ -24,6 +24,10 @@ class Web3Svc {
     return this.$web3;
   }
 
+  public get activeAccount(): string {
+    return this.$web3.eth.defaultAccount;
+  }
+
   public setAccount(username: string): boolean {
     if (username in this.usersToAccountMap) {
       this.$web3.eth.defaultAccount = this.$web3.eth.accounts[this.usersToAccountMap[username]];

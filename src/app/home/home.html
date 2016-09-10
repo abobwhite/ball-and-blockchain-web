@@ -82,6 +82,7 @@
           Ratings&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.ratings.length}}</span>
         </uib-tab-heading>
         <div class="table-responsive" ng-if="ctrl.hasRatings">
+          <button class="pull-right btn btn-success" ng-click="ctrl.addRating(ctrl.selectedPolicy)">RATE POLICY</button><br/>
           <table class="table table-bordered table-hover table-striped">
             <thead>
             <tr>
@@ -103,7 +104,7 @@
         </div>
         <div ng-if="!ctrl.hasRatings" style="font-style: italic">
           No Ratings have been given...<br/><br/>
-          <button class="btn btn-lg btn-success">RATE POLICY</button>
+          <button class="btn btn-lg btn-success" ng-click="ctrl.addRating(ctrl.selectedPolicy)">RATE POLICY</button>
         </div>
       </uib-tab>
       <uib-tab index="2">
@@ -111,6 +112,7 @@
           BIDS&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.bids.length}}</span>
         </uib-tab-heading>
         <div class="table-responsive" ng-if="ctrl.hasBids">
+          <button class="pull-right btn btn-success" ng-click="ctrl.addBid(ctrl.selectedPolicy)">PLACE BID</button><br/>
           <table class="table table-bordered table-hover table-striped">
             <thead>
             <tr>
@@ -128,7 +130,7 @@
         </div>
         <div ng-if="!ctrl.hasBids" style="font-style: italic">
           No Bids have been added...<br/><br/>
-          <button class="btn btn-lg btn-success">PLACE BID</button>
+          <button class="btn btn-lg btn-success" ng-click="ctrl.addBid(ctrl.selectedPolicy)">PLACE BID</button>
         </div>
       </uib-tab>
     </uib-tabset>
