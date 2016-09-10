@@ -1,5 +1,6 @@
 import IPromise = angular.IPromise;
 import Policy from '../domain/policy.ts';
+import Rating from '../domain/rating.ts';
 import Web3Svc from './web3.svc.ts';
 import abi from '../abi/policy.ts';
 import Territory from '../domain/territory.ts';
@@ -39,16 +40,16 @@ class PolicySvc {
     });
   }
 
-  public bid(value: number): IPromise<any> {
-    return this.executeContract('bid', [value]);
+  public bid(policyId: string, value: number): IPromise<any> {
+    return this.executeContract('bid', [policyId, value]);
   }
 
-  public cancelBid(): IPromise<any> {
-    return this.executeContract('cancelBid', []);
-  }
+  // public cancelBid(): IPromise<any> {
+  //   return this.executeContract('cancelBid', []);
+  // }
 
-  public getBids(): IPromise<any> {
-    return this.executeContract('getBids', []).then(result => {
+  public getBids(policyId: string): IPromise<any> {
+    return this.executeContract('getBids', [policyId]).then(result => {
       return result[0].map((item, index) => {
         return {
           bidder: result[0][index],
@@ -58,8 +59,32 @@ class PolicySvc {
     });
   }
 
-  public accept(address: string): IPromise<any> {
-    return this.policyContract.accept(address);
+  public accept(policyId: string, address: string): IPromise<any> {
+    return this.policyContract.accept(policyId, address);
+  }
+
+  // todo: implement
+  public addRating(policyId: string, value: number, cost: number, details: string): IPromise<any>{
+    return this.executeContract('addReview', arguments);
+  }
+
+  public getRatings(policyId: string): IPromise<any> {
+    return this.executeContract('getReviews', arguments).then(result => {
+      return result[0].map((item, index) => {
+        return new Rating({
+          id: result[0][index],
+          policyId: result[1][index],
+          //userId: result[2][index], // todo: there is no user id coming back
+          value: this.Web3.raw.toDecimal(result[2][index]),
+          cost: this.Web3.raw.toDecimal(result[3][index]),
+          details: this.Web3.raw.toAscii(result[4][index])
+        });
+      });
+    });
+  }
+
+  public buyRating(reviewId: string): IPromise<any> {
+    return this.executeContract('buyReview', arguments);
   }
 
   private executeContract(method: string, args: any): IPromise<any> {
