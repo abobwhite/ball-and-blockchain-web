@@ -11,13 +11,14 @@ class PolicySvc {
   /** @ngInject */
   constructor(Web3: Web3Svc) {
     this.Web3 = Web3;
-    const address: string = '0xf152a771cfaa9a848af9f52dbcb442f75f629eda';
+    const address: string = '0xffef5840edf53beafc3f7aee8fb3fd77ecb569f0';
 
     this.policyContract = this.Web3.getContract(abi, address);
   }
 
-  public addPolicy(disclosure: string): IPromise<any>  {
-    return this.executeContract('addPolicy', [disclosure]);
+  public addPolicy(riskType: string, ratingExpiration: number, offerExpiration: number, territoryOfIssue: string,
+                   policyFaceAmount: number, gender: string, dob: number, disclosures: string): IPromise<any>  {
+    return this.executeContract('addPolicy', arguments);
   }
 
   public getPolicies(): IPromise<Policy> {
@@ -61,7 +62,7 @@ class PolicySvc {
     return this.policyContract.accept(address);
   }
 
-  private executeContract(method: string, args: Array<any>): IPromise<any> {
+  private executeContract(method: string, args: any): IPromise<any> {
     return this.Web3.executeContract(this.policyContract, method, args);
   }
 }
