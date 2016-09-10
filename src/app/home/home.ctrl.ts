@@ -8,16 +8,26 @@ class HomeCtrl {
 
   /** @ngInject */
   constructor() {
-    let policy1: Policy = new Policy();
-    policy1.id = '12345678901234567892345678';
-    policy1.assumingUserId = 'q827343333';
-    policy1.cedingUserId = '923878327';
-    policy1.riskType = RiskType.LUNG_CANCER;
-    policy1.policyFaceAmount = 100000;
-    policy1.ratingExpiration = moment().add(1, 'd').toDate();
-    policy1.offerExpiration = moment().add(2, 'd').toDate();
-
-    this.policies = [policy1];
+    this.policies = [
+      new Policy({
+        id: '12345678901234567892345678',
+        assumingUserId: 'q827343333',
+        cedingUserId: '923878327',
+        riskType: RiskType.LUNG_CANCER,
+        policyFaceAmount: 100000,
+        ratingExpiration: moment().add(1, 'd').toDate(),
+        offerExpiration: moment().add(2, 'd').toDate()
+      }),
+      new Policy({
+        id: '34567890456789',
+        assumingUserId: '9876543987654',
+        cedingUserId: '234567890',
+        riskType: RiskType.HEART_ATTACK,
+        policyFaceAmount: 250000,
+        ratingExpiration: moment().subtract(1, 'd').toDate(),
+        offerExpiration: moment().add(2, 'd').toDate()
+      })
+    ];
   }
 
   public get hasSelectedPolicy(): boolean {
