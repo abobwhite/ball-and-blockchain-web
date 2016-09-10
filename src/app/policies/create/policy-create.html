@@ -7,42 +7,79 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-12">
-    <dl class="dl-horizontal">
-      <dt>Text</dt>
-      <dd>Policy #</dd>
+  <div class="col-sm-4">
+    <form name="policyCreateFrm" novalidate ng-submit="ctrl.savePolicy(policyCreateFrm)">
+      <form-field label="Risk Type" required>
+        <select class="form-control" required ng-model="ctrl.policy.riskType"
+                ng-options="riskType.value as riskType.name for riskType in ctrl.riskTypeOptions"></select>
+      </form-field>
 
-      <dt>Text - disabled</dt>
-      <dd>Product</dd>
+      <form-field label="Face Amount" required>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-dollar"></i></span>
+          <input type="number" class="form-control" ng-model="ctrl.policy.policyFaceAmount" required placeholder="100000" />
+        </div>
+      </form-field>
 
-      <dt>$$$</dt>
-      <dd>Amount at Risk</dd>
+      <div class="row">
+        <div class="col-sm-6">
+          <form-field label="Rating Expiration" required>
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="short"
+                     ng-model="ctrl.policy.ratingExpiration" is-open="ctrl.ratingExpirationOpen" datepicker-options="ctrl.datepickerOptions"
+                     ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="ctrl.ratingExpirationOpen = !ctrl.ratingExpirationOpen">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span>
+            </p>
+          </form-field>
+        </div>
+        <div class="col-sm-6">
+          <form-field label="Rating Expiration" required>
+            <p class="input-group">
+              <input type="text" class="form-control" uib-datepicker-popup="short"
+                     ng-model="ctrl.policy.offerExpiration" is-open="ctrl.bidExpirationOpen" datepicker-options="ctrl.datepickerOptions"
+                     ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="ctrl.bidExpirationOpen = !ctrl.bidExpirationOpen">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </span>
+            </p>
+          </form-field>
+        </div>
+      </div>
 
-      <dt>Date</dt>
-      <dd>Rating Expiration</dd>
+      <div class="row">
+        <div class="col-sm-6">
+          <form-field label="Gender" required>
+            <select class="form-control" required ng-model="ctrl.policy.gender"
+                    ng-options="gender.value as gender.name for gender in ctrl.genderOptions"></select>
+          </form-field>
+        </div>
+        <div class="col-sm-6">
+          <form-field label="Marital Status" required>
+            <select class="form-control" required ng-model="ctrl.policy.maritalStatus"
+                    ng-options="maritalStatus.value as maritalStatus.name for maritalStatus in ctrl.maritalStatusOptions"></select>
+          </form-field>
+        </div>
+      </div>
 
-      <dt>Date</dt>
-      <dd>Bid Expiration</dd>
+      <div class="row">
+        <div class="col-sm-6">
+          <input type="checkbox" ng-model="ctrl.policy.smoker" />&nbsp;Smoker?
+        </div>
+        <div class="col-sm-6">
+          <form-field label="Territory" required>
+            <select class="form-control" required ng-model="ctrl.policy.territoryOfIssue"
+                    ng-options="territory.value as territory.name for territory in ctrl.territoryOptions"></select>
+          </form-field>
+        </div>
+      </div>
 
-      <dt>List of docs - fake upload btn</dt>
-      <dd>Disclosures</dd>
-
-      <dt>Radio button</dt>
-      <dd>Gender</dd>
-
-      <dt>Date</dt>
-      <dd>DOB</dd>
-
-      <dt>Checkbox</dt>
-      <dd>Smoker</dd>
-
-      <dt>Checkbox</dt>
-      <dd>Married</dd>
-
-      <dt>Dropdown</dt>
-      <dd>Territory</dd>
-    </dl>
-
-    <button class="btn btn-lg btn-success">SAVE</button>
+      <button class="btn btn-lg btn-success">SAVE</button>
+    </form>
   </div>
 </div>

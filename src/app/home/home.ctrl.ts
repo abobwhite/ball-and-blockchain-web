@@ -1,20 +1,20 @@
-import PolicySvc from '../service/policy.svc.ts';
-import RiskType from '../domain/risk-type.ts';
 import Policy from '../domain/policy.ts';
-import * as moment from 'moment';
 import IToastrService = angular.toastr.IToastrService;
+import PolicySvc from "../service/policy.svc.ts";
 
 class HomeCtrl {
+  public Policies: PolicySvc;
   public policies: Array<Policy> = [];
   public selectedPolicy: Policy;
   private $uibModal: any;
   private toastr: IToastrService;
 
   /** @ngInject */
-  constructor(policies: Array<Policy>, $uibModal: any, toastr: IToastrService) {
+  constructor(policies: Array<Policy>, $uibModal: any, toastr: IToastrService, Policies: PolicySvc) {
     this.policies = policies;
     this.$uibModal = $uibModal;
     this.toastr = toastr;
+    this.Policies = Policies;
   }
 
   public policyIsSelected(policy: Policy): boolean {
@@ -60,27 +60,11 @@ class HomeCtrl {
   }
 
   private loadPolicies(): void {
-    //return Policies.getPolicies();
-    this.policies = [
-      new Policy({
-        id: '12345678901234567892345678',
-        assumingUserId: 'q827343333',
-        cedingUserId: '923878327',
-        riskType: RiskType.LUNG_CANCER,
-        policyFaceAmount: 100000,
-        ratingExpiration: moment().add(1, 'd').toDate(),
-        offerExpiration: moment().add(2, 'd').toDate()
-      }),
-      new Policy({
-        id: '34567890456789',
-        assumingUserId: '9876543987654',
-        cedingUserId: '234567890',
-        riskType: RiskType.HEART_ATTACK,
-        policyFaceAmount: 250000,
-        ratingExpiration: moment().subtract(1, 'd').toDate(),
-        offerExpiration: moment().add(2, 'd').toDate()
-      })
-    ];
+    this.Policies.getPolicies().then((policies: any) => {
+      this.policies = policies;
+    }, () => {
+      this.toastr.error('Could not load policies');
+    });
   }
 }
 

@@ -25,12 +25,12 @@ class RatingCreateCtrl {
 
   public saveRating(form: any): void {
     if (form.$valid) {
-      // this.Policies.addRating(this.rating).then(() => {
-      //   this.toastr.success('Rating was added');
-      //   this.$uibModalInstance.dismiss();
-      // }, () => {
-      //   this.toastr.error('There was an error adding your rating');
-      // });
+      this.Policies.addRating(this.rating.policyId, this.rating.value, this.rating.cost, '').then(() => {
+        this.toastr.success('Rating was added');
+        this.$uibModalInstance.dismiss();
+      }, () => {
+        this.toastr.error('There was an error adding your rating');
+      });
     } else {
       this.toastr.error('All fields are required, please try again');
     }
