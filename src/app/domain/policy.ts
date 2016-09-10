@@ -28,6 +28,14 @@ class Policy extends DomainBase {
   public get isRequestingBids(): boolean {
     return moment().isAfter(moment(this.ratingExpiration)) && moment().isBefore(moment(this.offerExpiration));
   }
+
+  public get hasRatings(): boolean {
+    return this.ratings.length > 0;
+  }
+
+  public get hasBids(): boolean {
+    return this.bids.length > 0;
+  }
 }
 
 export default Policy;

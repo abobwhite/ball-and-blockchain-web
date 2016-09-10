@@ -73,19 +73,63 @@
           <dd>{{ctrl.selectedPolicy.ratingExpiration | date : 'short'}}</dd>
           <dt>Bid Expiration</dt>
           <dd>{{ctrl.selectedPolicy.offerExpiration | date : 'short'}}</dd>
+
+          <!--TODO: FINISH DETAILS -->
         </dl>
       </uib-tab>
       <uib-tab index="1">
         <uib-tab-heading>
           Ratings&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.ratings.length}}</span>
         </uib-tab-heading>
-        TODO
+        <div class="table-responsive" ng-if="ctrl.hasRatings">
+          <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+              <th>Analyst</th>
+              <th>Score</th>
+              <th>Cost</th>
+              <th>Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="rating in ctrl.selectedPolicy.ratings">
+              <td>{{rating.userId}}</td>
+              <td>{{rating.value}}</td>
+              <td>{{rating.cost}}</td>
+              <td>{{rating.details}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-if="!ctrl.hasRatings" style="font-style: italic">
+          No Ratings have been given...<br/><br/>
+          <button class="btn btn-lg btn-success">RATE POLICY</button>
+        </div>
       </uib-tab>
       <uib-tab index="2">
         <uib-tab-heading>
           BIDS&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.bids.length}}</span>
         </uib-tab-heading>
-        TODO
+        <div class="table-responsive" ng-if="ctrl.hasBids">
+          <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+              <th>Bidder</th>
+              <th>Bid</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="bid in ctrl.selectedPolicy.bids">
+              <td>{{bid.userId}}</td>
+              <td>{{bid.value}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div ng-if="!ctrl.hasBids" style="font-style: italic">
+          No Bids have been added...<br/><br/>
+          <button class="btn btn-lg btn-success">PLACE BID</button>
+        </div>
       </uib-tab>
     </uib-tabset>
   </div>
