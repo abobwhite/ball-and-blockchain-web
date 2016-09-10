@@ -20,7 +20,7 @@ class PolicySvc {
     this.policyContract = this.Web3.getContract(abi, address);
 
     // this.bid("0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6", 300);
-    this.getPolicies();
+    //this.getPolicies();
     // this.policyContract.NewBid().watch((err, result) => {
     //   if (err) {
     //     console.log("Error! + ", err);
