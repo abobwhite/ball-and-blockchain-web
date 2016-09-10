@@ -24,6 +24,8 @@ import Web3Svc from './service/web3.svc.ts';
 import RatingCreateCtrl from './ratings/rating-create/rating-create.ctrl.ts';
 import BidCreateCtrl from './bids/bid-create/bid-create.ctrl.ts';
 import EnumHelperSvc from './service/enum-helper.svc.ts';
+import MyPoliciesCtrl from './policies/my-policies/my-policies.ctrl.ts';
+import BidAcceptCtrl from './bids/bid-accept/bid-accept.ctrl.ts';
 
 let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toastr', 'ui.bootstrap'])
     .directive('formField', FormFieldDir)
@@ -41,7 +43,9 @@ let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toas
     .controller('PolicyCreateCtrl', PolicyCreateCtrl)
     .controller('LoginCtrl', LoginCtrl)
     .controller('RatingCreateCtrl', RatingCreateCtrl)
-    .controller('BidCreateCtrl', BidCreateCtrl);
+    .controller('BidCreateCtrl', BidCreateCtrl)
+    .controller('MyPoliciesCtrl', MyPoliciesCtrl)
+    .controller('BidAcceptCtrl', BidAcceptCtrl);
 
 import './routes.ts';
 import IToastrService = angular.toastr.IToastrService;

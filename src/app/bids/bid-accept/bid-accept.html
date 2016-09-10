@@ -1,0 +1,42 @@
+<div>
+  <div class="modal-header">
+    <h3 class="modal-title">Views Bids</h3>
+  </div>
+  <div class="modal-body" style="word-wrap: break-word">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                  <th>Bidder</th>
+                  <th>Amount</th>
+                  <td></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="bid in ctrl.policy.bids">
+                  <td>{{bid.userId}}</td>
+                  <td>{{bid.value}}</td>
+                  <td class="text-right">
+                    <button class="btn btn-success" ng-click="ctrl.acceptBid(bid)">ACCEPT</button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="ctrl.cancel()">CLOSE</button>
+  </div>
+</div>
+
+
+
+
