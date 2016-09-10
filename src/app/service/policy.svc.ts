@@ -20,7 +20,7 @@ class PolicySvc {
     this.policyContract = this.Web3.getContract(abi, address);
 
     // this.bid("0xb10e2d527612073b26eecdfd717e6a320cf44b4afac2b0732d9fcbe2b7fa0cf6", 300);
-    // this.getPolicies();
+    this.getPolicies();
     // this.policyContract.NewBid().watch((err, result) => {
     //   if (err) {
     //     console.log("Error! + ", err);
@@ -37,12 +37,24 @@ class PolicySvc {
   }
 
   public getPolicies(): IPromise<Policy> {
-    // let policiesById: any = {};
-    // let policies: any = [];
+    let policiesById: any = {};
+    let policies: any = [];
 
     return this.executeContract('getPolicies', []).then(result => {
-      return result[0].map((item, index) => {
-        return new Policy({
+    //   return result[0].map((item, index) => {
+    //     return new Policy({
+    //       id: result[0][index],
+    //       riskType: this.Web3.raw.toAscii(result[1][index]),
+    //       ratingExpiration: new Date(this.Web3.raw.toDecimal(result[2][index])),
+    //       offerExpiration: new Date(this.Web3.raw.toDecimal(result[3][index])),
+    //       territoryOfIssue: <Territory>(this.Web3.raw.toAscii(result[4][index])),
+    //       policyFaceAmount: this.Web3.raw.toDecimal(result[5][index]),
+    //       cedingUserId: result[6][index]
+    //     });
+    //   });
+
+      policies = result[0].map((item, index) => {
+        policiesById[result[0][index]] = new Policy({
           id: result[0][index],
           riskType: this.Web3.raw.toAscii(result[1][index]),
           ratingExpiration: new Date(this.Web3.raw.toDecimal(result[2][index])),
@@ -51,47 +63,30 @@ class PolicySvc {
           policyFaceAmount: this.Web3.raw.toDecimal(result[5][index]),
           cedingUserId: result[6][index]
         });
+
+        return policiesById[result[0][index]];
       });
 
+      return Promise.resolve(policies);
 
-    //   // public ratings: Array<Rating> = [];
-    //   // public bids: Array<Bid> = [];
-    //
-    //   policies = result[0].map((item, index) => {
-    //     policiesById[result[0][index]] = new Policy({
-    //       id: result[0][index],
-    //       riskType: this.Web3.raw.toAscii(result[1][index]),
-    //       ratingExpiration: new Date(this.Web3.raw.toDecimal(result[2][index])),
-    //       offerExpiration: new Date(this.Web3.raw.toDecimal(result[3][index])),
-    //       territoryOfIssue: <Territory>(this.Web3.raw.toAscii(result[4][index])),
-    //       policyFaceAmount: this.Web3.raw.toDecimal(result[5][index]),
-    //       disclosures: this.Web3.raw.toAscii(result[6][index]),
-    //       assumingUserId: 'q827343333',
-    //       cedingUserId: '923878327'
-    //     });
-    //
-    //     return policiesById[result[0][index]];
-    //   });
-    //
-    //   return Promise.resolve(policies);
-    //
-    // }).then(() => {
-    //   return new Promise((resolve, reject) => {
-    //     return Promise.all(promises.concat).then()
-    //   });
-    //
-    //   var promises: any = Object.keys(policiesById).map((key) => {
-    //       return this.getBids(key).then((bids) => {
-    //         policiesById[key].bids = bids;
-    //       }).catch(console.error);
-    //   });
-    //
-    //   // debugger;
-    //   // return Promise.all(promises).then();
-    //
-    // });
-    // //     .then((r) => {
-    // //   debugger;
+    }).then(() => {
+      return new Promise((resolve, reject) => {
+        var bidPromises: any = Object.keys(policiesById).map((key) => {
+          return this.getBids(key).then((bids) => {
+            policiesById[key].bids = bids;
+          }).catch(() => {});
+        });
+
+        var ratingPromises: any = Object.keys(policiesById).map((key) => {
+          return this.getRatings(key).then((ratings) => {
+            policiesById[key].ratings = ratings;
+          }).catch(() => {});
+        });
+
+        return Promise.all(bidPromises.concat(ratingPromises)).then(resolve);
+      });
+    }).then(() => {
+      return policies;
     });
   }
 
@@ -145,7 +140,7 @@ class PolicySvc {
   }
 
   private executeContract(method: string, args: any): IPromise<any> {
-    return this.Web3.executeContract(this.policyContract, method, args);
+    return this.Web3.executeContract.call(this.Web3.raw.eth.accounts[3], this.policyContract, method, args);
   }
 }
 

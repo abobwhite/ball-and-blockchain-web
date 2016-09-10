@@ -76,7 +76,7 @@
         <uib-tab-heading>
           Ratings&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.ratings.length}}</span>
         </uib-tab-heading>
-        <div class="table-responsive" ng-if="ctrl.hasRatings">
+        <div class="table-responsive" ng-if="ctrl.selectedPolicy.hasRatings">
           <button class="pull-right btn btn-success" ng-click="ctrl.addRating(ctrl.selectedPolicy)">RATE POLICY</button><br/>
           <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -84,7 +84,6 @@
               <th>Analyst</th>
               <th>Score</th>
               <th>Cost</th>
-              <th>Details</th>
             </tr>
             </thead>
             <tbody>
@@ -92,12 +91,11 @@
               <td>{{rating.userId}}</td>
               <td>{{rating.value}}</td>
               <td>{{rating.cost}}</td>
-              <td>{{rating.details}}</td>
             </tr>
             </tbody>
           </table>
         </div>
-        <div ng-if="!ctrl.hasRatings" style="font-style: italic">
+        <div ng-if="!ctrl.selectedPolicy.hasRatings" style="font-style: italic">
           No Ratings have been given...<br/><br/>
           <button class="btn btn-lg btn-success" ng-click="ctrl.addRating(ctrl.selectedPolicy)">RATE POLICY</button>
         </div>
@@ -106,7 +104,7 @@
         <uib-tab-heading>
           BIDS&nbsp;&nbsp;<span class="badge badge-default">{{ctrl.selectedPolicy.bids.length}}</span>
         </uib-tab-heading>
-        <div class="table-responsive" ng-if="ctrl.hasBids">
+        <div class="table-responsive" ng-if="ctrl.selectedPolicy.hasBids">
           <button class="pull-right btn btn-success" ng-click="ctrl.addBid(ctrl.selectedPolicy)">PLACE BID</button><br/>
           <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -123,7 +121,7 @@
             </tbody>
           </table>
         </div>
-        <div ng-if="!ctrl.hasBids" style="font-style: italic">
+        <div ng-if="!ctrl.selectedPolicy.hasBids" style="font-style: italic">
           No Bids have been added...<br/><br/>
           <button class="btn btn-lg btn-success" ng-click="ctrl.addBid(ctrl.selectedPolicy)">PLACE BID</button>
         </div>
