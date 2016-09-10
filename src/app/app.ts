@@ -15,9 +15,16 @@ import SideBarCtrl from './side-bar/side-bar.ctrl.ts';
 import HomeCtrl from './home/home.ctrl.ts';
 import Events from './service/events.svc.ts';
 import Policies from './service/policy.svc.ts';
+import AuthSvc from './service/auth.svc.ts';
 import PolicyCreateCtrl from './policies/create/policy-create.ctrl.ts';
+import LoginCtrl from './login/login.ctrl.ts';
+import FormFieldDir from './directives/form-field/form-field.dir.ts';
+import NgTranscludeReplaceDir from './directives/ng-transclude-replace.dir.ts';
 
 let module: ng.IModule = angular.module('starterApp', ['ui.router', 'toastr', 'ui.bootstrap'])
+    .directive('formField', FormFieldDir)
+    .directive('ngTranscludeReplace', NgTranscludeReplaceDir)
+    .service('Auth', AuthSvc)
     .service('Events', Events)
     .service('Policies', Policies)
     .controller('HeaderCtrl', HeaderCtrl)
@@ -25,22 +32,24 @@ let module: ng.IModule = angular.module('starterApp', ['ui.router', 'toastr', 'u
     .controller('SideBarCtrl', SideBarCtrl)
     .component('sideBar', SideBarComp)
     .controller('HomeCtrl', HomeCtrl)
-    .controller('PolicyCreateCtrl', PolicyCreateCtrl);
+    .controller('PolicyCreateCtrl', PolicyCreateCtrl)
+    .controller('LoginCtrl', LoginCtrl);
 
 import './routes.ts';
 
-// module.config(($httpProvider) => {
-//   $httpProvider.interceptors.push(() => {
-//     return {
-//       request: (httpConfig) => {
-//         if (httpConfig.url.indexOf('.html') !== -1) {
-//           httpConfig.url = `/api${httpConfig.url}`;
-//         }
-//
-//         return httpConfig;
-//       }
-//     };
-//   });
-// });
+module.config(($locationProvider: ng.ILocationProvider) => {
+  $locationProvider.html5Mode(true);
+  // $httpProvider.interceptors.push(() => {
+  //   return {
+  //     request: (httpConfig) => {
+  //       if (httpConfig.url.indexOf('.html') !== -1) {
+  //         httpConfig.url = `/api${httpConfig.url}`;
+  //       }
+  //
+  //       return httpConfig;
+  //     }
+  //   };
+  // });
+});
 
 export default module;

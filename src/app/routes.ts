@@ -8,6 +8,11 @@ angular.module('starterApp').config(($stateProvider: ng.ui.IStateProvider, $urlR
       controller: 'HomeCtrl as ctrl',
       template: require('./home/home.html')
     })
+    .state('Login', {
+      url: '/login',
+      controller: 'LoginCtrl as ctrl',
+      template: require('./login/login.html')
+    })
     .state('PolicyCreate', {
       url: '/policies/create',
       controller: 'PolicyCreateCtrl as ctrl',
