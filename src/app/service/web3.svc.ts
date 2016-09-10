@@ -17,8 +17,6 @@ class Web3Svc {
     this.toastr = toastr;
     // CONFIG.eth.provider
     this.$web3 = new Web3(new Web3.providers.HttpProvider('http://192.241.254.151:8080'));
-    //this.$web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-    this.$web3.eth.defaultAccount = this.$web3.eth.accounts[0];
   }
 
   public get raw(): any {

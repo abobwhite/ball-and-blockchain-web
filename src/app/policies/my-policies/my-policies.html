@@ -34,19 +34,19 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="policy in ctrl.policies" ng-class="{'selectedPolicy': ctrl.policyIsSelected(policy)}" ng-click="ctrl.selectPolicy(policy)" class="pointer">
-              <td class="centered"><i class="fa" ng-class="{'fa-dollar': policy.isRequestingBids, 'fa-folder-open-o': policy.isRequestingRatings}"></i></td>
-              <td>{{policy.riskType}}</td>
-              <td>{{policy.policyFaceAmount}}</td>
-              <td>{{policy.cedingUserId}}</td>
-              <td>{{policy.ratings.length}}</td>
-              <td>{{policy.ratingExpiration | date : 'short'}}</td>
-              <td>{{policy.bids.length}}</td>
-              <td>{{policy.offerExpiration | date : 'short'}}</td>
-              <td class="text-right">
-                <button class="btn btn-primary" ng-click="ctrl.viewBids(policy)">View Bids</button>
-              </td>
-            </tr>
+              <tr ng-repeat="policy in ctrl.policies">
+                <td class="centered"><i class="fa" ng-class="{'fa-dollar': policy.isRequestingBids, 'fa-folder-open-o': policy.isRequestingRatings}"></i></td>
+                <td>{{policy.riskType}}</td>
+                <td>{{policy.policyFaceAmount}}</td>
+                <td>{{policy.cedingUserId}}</td>
+                <td>{{policy.ratings.length}}</td>
+                <td>{{policy.ratingExpiration | date : 'short'}}</td>
+                <td>{{policy.bids.length}}</td>
+                <td>{{policy.offerExpiration | date : 'short'}}</td>
+                <td class="text-right">
+                  <button class="btn btn-primary" ng-click="ctrl.viewBids(policy)">View Bids</button>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

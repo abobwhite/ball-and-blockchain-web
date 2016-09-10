@@ -55,7 +55,7 @@ module.config(($locationProvider: ng.ILocationProvider) => {
 });
 
 module.run(/** @ngInject */($rootScope: ng.IRootScopeService, $state: ng.ui.IStateService, $stateParams: ng.ui.IStateParamsService,
-            Auth: AuthSvc, toastr: IToastrService) => {
+            Auth: AuthSvc, toastr: IToastrService, Web3: Web3Svc) => {
   $rootScope.$on('$stateChangeStart', (event, toState) => {
     if (!Auth.getLoggedInUser() && toState.name !== 'Login') {
       event.preventDefault();
@@ -63,6 +63,10 @@ module.run(/** @ngInject */($rootScope: ng.IRootScopeService, $state: ng.ui.ISta
       $state.go('Login');
     }
   });
+
+  if (!!Auth.getLoggedInUser()) {
+    Web3.setAccount(Auth.getLoggedInUser());
+  }
 });
 
 export default module;
