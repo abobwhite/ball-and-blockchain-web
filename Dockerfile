@@ -4,7 +4,7 @@ FROM nginx
 RUN apt-get update && \
     apt-get -y install curl && \
     curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get -y install nodejs
+    apt-get -y install nodejs git
 
 COPY deploy/nginx.conf /etc/nginx/nginx.conf
 
