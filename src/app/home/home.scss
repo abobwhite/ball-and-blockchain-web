@@ -1,3 +1,6 @@
-.home {
-  //TODO: home styles
+@import "../_colors";
+
+.selectedPolicy {
+  background-color: $primaryLight !important;
+  color: $white;
 }

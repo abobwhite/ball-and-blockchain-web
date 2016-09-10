@@ -20,13 +20,15 @@ import PolicyCreateCtrl from './policies/create/policy-create.ctrl.ts';
 import LoginCtrl from './login/login.ctrl.ts';
 import FormFieldDir from './directives/form-field/form-field.dir.ts';
 import NgTranscludeReplaceDir from './directives/ng-transclude-replace.dir.ts';
+import Web3Svc from './service/web3.svc.ts';
 
-let module: ng.IModule = angular.module('starterApp', ['ui.router', 'toastr', 'ui.bootstrap'])
+let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toastr', 'ui.bootstrap'])
     .directive('formField', FormFieldDir)
     .directive('ngTranscludeReplace', NgTranscludeReplaceDir)
     .service('Auth', AuthSvc)
     .service('Events', Events)
     .service('Policies', Policies)
+    .service('Web3', Web3Svc)
     .controller('HeaderCtrl', HeaderCtrl)
     .component('header', HeaderComp)
     .controller('SideBarCtrl', SideBarCtrl)

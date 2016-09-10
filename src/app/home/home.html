@@ -35,7 +35,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="policy in ctrl.policies" ng-click="ctrl.selectPolicy(policy)" class="pointer">
+                  <tr ng-repeat="policy in ctrl.policies" ng-class="{'selectedPolicy': ctrl.policyIsSelected(policy)}" ng-click="ctrl.selectPolicy(policy)" class="pointer">
                     <td class="centered"><i class="fa" ng-class="{'fa-dollar': policy.isRequestingBids, 'fa-folder-open-o': policy.isRequestingRatings}"></i></td>
                     <td>{{policy.riskType}}</td>
                     <td>{{policy.policyFaceAmount}}</td>

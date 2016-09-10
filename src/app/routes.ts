@@ -1,5 +1,5 @@
 /** @ngInject */
-angular.module('starterApp').config(($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.route.IRouteProvider): void => {
+angular.module('ballAndBlockchain').config(($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.route.IRouteProvider): void => {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider

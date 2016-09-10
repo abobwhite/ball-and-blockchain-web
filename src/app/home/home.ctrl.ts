@@ -30,6 +30,10 @@ class HomeCtrl {
     ];
   }
 
+  public policyIsSelected(policy: Policy): boolean {
+    return this.selectedPolicy === policy;
+  }
+
   public get hasSelectedPolicy(): boolean {
     return !!this.selectedPolicy;
   }
