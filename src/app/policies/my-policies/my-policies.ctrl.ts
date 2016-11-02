@@ -23,13 +23,13 @@ class MyPoliciesCtrl {
     let modalInstance: any = this.$uibModal.open({
       template: require('../../bids/bid-accept/bid-accept.html'),
       controller: 'BidAcceptCtrl as ctrl',
-      size: 'sm',
       resolve: {
         policy: () => { return policy; }
       }
     });
 
-    modalInstance.result.then(this.loadPolicies.bind(this));
+    //TODO: We can't accept bids yet so don't worry about this
+    //modalInstance.result.then(this.loadPolicies.bind(this));
   }
 
   private loadPolicies(): void {

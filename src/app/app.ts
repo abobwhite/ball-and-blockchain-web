@@ -26,8 +26,13 @@ import BidCreateCtrl from './bids/bid-create/bid-create.ctrl.ts';
 import EnumHelperSvc from './service/enum-helper.svc.ts';
 import MyPoliciesCtrl from './policies/my-policies/my-policies.ctrl.ts';
 import BidAcceptCtrl from './bids/bid-accept/bid-accept.ctrl.ts';
+import HttpRequestNotificationChannel from './service/http-request-notification-channel.ts';
+import HttpInterceptor from './provider/http-interceptor.ts';
+import LoadingDirective from './directives/loading.dir.ts';
 
 let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toastr', 'ui.bootstrap'])
+    .service('requestNotificationChannel', HttpRequestNotificationChannel)
+    .directive('loading', LoadingDirective)
     .directive('formField', FormFieldDir)
     .directive('ngTranscludeReplace', NgTranscludeReplaceDir)
     .service('Auth', AuthSvc)
@@ -50,8 +55,9 @@ let module: ng.IModule = angular.module('ballAndBlockchain', ['ui.router', 'toas
 import './routes.ts';
 import IToastrService = angular.toastr.IToastrService;
 
-module.config(($locationProvider: ng.ILocationProvider) => {
+module.config(($locationProvider: ng.ILocationProvider, $httpProvider: ng.IHttpProvider) => {
   $locationProvider.html5Mode(true);
+  $httpProvider.interceptors.push(HttpInterceptor.factory);
 });
 
 module.run(/** @ngInject */($rootScope: ng.IRootScopeService, $state: ng.ui.IStateService, $stateParams: ng.ui.IStateParamsService,

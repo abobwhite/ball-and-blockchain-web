@@ -157,8 +157,10 @@ module.exports = function makeWebpackConfig () {
   config.plugins = [
     // Scans source code for identifier and replaces it with reference to module as if it had been required
     new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery"
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.$': 'jquery',
+      'window.jQuery': 'jquery'
     })
   ];
 

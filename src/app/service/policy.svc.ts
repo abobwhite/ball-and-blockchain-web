@@ -140,7 +140,7 @@ class PolicySvc {
   }
 
   private executeContract(method: string, args: any): IPromise<any> {
-    return this.Web3.executeContract.call(this.Web3.raw.eth.accounts[3], this.policyContract, method, args);
+    return this.Web3.executeContract(this.policyContract, method, args);
   }
 }
 

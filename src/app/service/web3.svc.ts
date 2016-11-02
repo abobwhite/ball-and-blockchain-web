@@ -3,7 +3,9 @@ import IToastrService = angular.toastr.IToastrService;
 var Web3: any = require('web3');
 
 class Web3Svc {
-  private toastr: IToastrService;
+  public pendingRequests: number = 0;
+  public static WEB3_REQUEST: string = 'web3RequestEvent';
+  public static WEB3_RESPONSE: string = 'web3ResponseEvent';
   private $web3: any;
   private usersToAccountMap: Object = {
     'abobwhite': 0,
@@ -13,8 +15,7 @@ class Web3Svc {
   };
 
   /** @ngInject */
-  constructor(toastr: IToastrService) {
-    this.toastr = toastr;
+  constructor(private toastr: IToastrService, private $rootScope: ng.IRootScopeService) {
     // CONFIG.eth.provider
     this.$web3 = new Web3(new Web3.providers.HttpProvider('http://192.241.254.151:8080'));
   }
@@ -43,6 +44,9 @@ class Web3Svc {
   }
 
   public executeContract(contract: any, method: string, args: Array<any>): IPromise<any> {
+    this.pendingRequests += 1;
+    this.$rootScope.$broadcast(Web3Svc.WEB3_REQUEST);
+
     return <IPromise<any>>(new Promise((resolve, reject) => {
       setTimeout(() => {
         try {
@@ -51,7 +55,14 @@ class Web3Svc {
           reject(err);
         }
       }, 1);
-    }));
+    })).then((response) => {
+      this.pendingRequests -= 1;
+      this.$rootScope.$broadcast(Web3Svc.WEB3_RESPONSE);
+      return response;
+    }, () => {
+      this.pendingRequests -= 1;
+      this.$rootScope.$broadcast(Web3Svc.WEB3_RESPONSE);
+    });
   }
 }
 
